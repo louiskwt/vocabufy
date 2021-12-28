@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Text, Button, SafeAreaView } from 'react-native';
+import { Button, SafeAreaView } from 'react-native';
 import useAuth from '../hooks/useAuth';
 import tw from 'tailwind-rn';
 import Header from '../components/Header';

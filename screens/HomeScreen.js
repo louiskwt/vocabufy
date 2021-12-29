@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Button, SafeAreaView } from 'react-native';
+import { Button, SafeAreaView, View } from 'react-native';
 import useAuth from '../hooks/useAuth';
 import tw from 'tailwind-rn';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
+import CardButtons from '../components/CardButtons';
 
 const HomeScreen = () => {
 	const navigation = useNavigation();
@@ -15,10 +16,8 @@ const HomeScreen = () => {
 			<Header navigation={navigation} user={user} />
 			{/* Learning Feed  */}
 			<Cards />
-			<Button
-				title='Explore deck'
-				onPress={() => navigation.navigate('Deck')}
-			/>
+			<CardButtons />
+
 			<Button title='Log out' onPress={logout} />
 		</SafeAreaView>
 	);

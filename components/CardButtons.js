@@ -3,7 +3,8 @@ import { View, TouchableOpacity } from 'react-native';
 import tw from 'tailwind-rn';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 
-const CardButtons = () => {
+const CardButtons = (props) => {
+	const { swipeRef } = props;
 	return (
 		<View style={tw('flex-row justify-evenly mb-5')}>
 			<TouchableOpacity

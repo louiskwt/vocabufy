@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import tw from 'tailwind-rn';
@@ -22,10 +22,12 @@ const Cards = () => {
 			id: '335'
 		}
 	];
+	const swipeRef = useRef(null);
 	return (
 		<>
 			<View style={tw('flex-1 -mt-9')}>
 				<Swiper
+					ref={swipeRef}
 					cards={MOCK_DATA}
 					containerStyle={{ backgroundColor: 'transparent' }}
 					stackSize={3}
@@ -33,10 +35,10 @@ const Cards = () => {
 					animateCardOpacity
 					verticalSwipe={false}
 					onSwipedLeft={() => {
-						console.log('Need to learn');
+						console.log('Swipe KNOWN');
 					}}
 					onSwipedRight={() => {
-						console.log('Learned');
+						console.log('Swipe DO NOT KNOW');
 					}}
 					overlayLabels={{
 						left: {
@@ -66,21 +68,19 @@ const Cards = () => {
 						>
 							<Text
 								style={tw(
-									'text-gray-800 text-xl font-large items-center'
+									'text-gray-800 text-xl text-xl items-center'
 								)}
 							>
 								{card.word}
 							</Text>
-							<Text
-								style={tw('text-gray-600 text-xl font-large')}
-							>
+							<Text style={tw('text-gray-600 text-xl text-xl')}>
 								{card.pos}
 							</Text>
 						</View>
 					)}
 				/>
 			</View>
-			<CardButtons />
+			<CardButtons swipeRef={swipeRef} />
 		</>
 	);
 };

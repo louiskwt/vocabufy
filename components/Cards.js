@@ -63,7 +63,7 @@ const Cards = () => {
 						<View
 							key={card.id}
 							style={tw(
-								'bg-white h-3/4 rounded-xl flex-column items-center justify-center'
+								'bg-white h-3/4 rounded-xl flex-col items-center justify-center'
 							)}
 						>
 							<Text

@@ -32,7 +32,9 @@ const InfoModalScreen = () => {
 
 	return (
 		<View style={tw('flex-1 items-center pt-1')}>
-			<Text style={tw('text-gray-800 text-xl font-large')}>Vocabufy</Text>
+			<Text style={tw('text-gray-800 text-xl font-extrabold')}>
+				Vocabufy
+			</Text>
 			<Text style={tw('text-xl text-gray-500 p-2')}>
 				Welcome {user.displayName}
 			</Text>

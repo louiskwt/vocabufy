@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Button, SafeAreaView } from 'react-native';
 import useAuth from '../hooks/useAuth';
@@ -7,12 +6,11 @@ import Header from '../components/Header';
 import Cards from '../components/Cards';
 
 const HomeScreen = () => {
-	const navigation = useNavigation();
 	const { logout, user } = useAuth();
 	return (
 		<SafeAreaView style={tw('flex-1')}>
 			{/* Header */}
-			<Header navigation={navigation} user={user} />
+			<Header user={user} />
 			{/* Learning Feed  */}
 			<Cards />
 			<Button title='Log out' onPress={logout} />

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import tw from 'tailwind-rn';
 import CardButtons from './CardButtons';
@@ -62,9 +62,12 @@ const Cards = () => {
 					renderCard={(card) => (
 						<View
 							key={card.id}
-							style={tw(
-								'bg-white h-3/4 rounded-xl flex-col items-center justify-center'
-							)}
+							style={[
+								tw(
+									'bg-white h-3/4 rounded-xl flex-col items-center justify-center'
+								),
+								styles.cardShadow
+							]}
 						>
 							<Text
 								style={tw(
@@ -86,3 +89,16 @@ const Cards = () => {
 };
 
 export default Cards;
+
+const styles = StyleSheet.create({
+	cardShadow: {
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 1
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 1.41,
+		elevation: 2
+	}
+});

@@ -9,15 +9,16 @@ import { db } from '../firebase';
 const InfoModalScreen = () => {
 	const { user } = useAuth();
 	const navigation = useNavigation();
+	const [name, setName] = useState(null);
 	const [level, setLevel] = useState(null);
 	const [target, setTarget] = useState(null);
-	const incompleteForm = !level || !target;
+	const incompleteForm = !name || !level || !target;
 
 	// db interaction
 	const updateUserProfile = () => {
 		setDoc(doc(db, 'users', user.uid), {
 			id: user.uid,
-			displayName: user.displayName,
+			displayName: name,
 			educaton: level,
 			aim: target,
 			timestamp: serverTimestamp()
@@ -35,11 +36,18 @@ const InfoModalScreen = () => {
 			<Text style={tw('text-gray-800 text-xl font-extrabold')}>
 				Vocabufy
 			</Text>
-			<Text style={tw('text-xl text-gray-500 p-2')}>
-				Welcome {user.displayName}
-			</Text>
+			<Text style={tw('text-xl text-gray-500 p-2')}>Welcome!!</Text>
 			<Text style={tw('text-center p-4 font-bold text-red-400')}>
-				Step 1: 就讚年級
+				Step 1: 你的名字
+			</Text>
+			<TextInput
+				style={tw('text-center text-xl pb-2')}
+				placeholder='Your preferred name'
+				value={name}
+				onChangeText={(text) => setName(text)}
+			/>
+			<Text style={tw('text-center p-4 font-bold text-red-400')}>
+				Step 2: 就讚年級
 			</Text>
 			<TextInput
 				style={tw('text-center text-xl pb-2')}

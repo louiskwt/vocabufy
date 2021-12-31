@@ -1,35 +1,38 @@
-import React, { useRef } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import tw from 'tailwind-rn';
+import { db } from '../firebase';
 import CardButtons from './CardButtons';
 
 const Cards = () => {
-	let MOCK_DATA = [
-		// {
-		// 	word: 'essential',
-		// 	pos: 'adjective',
-		// 	id: '123'
-		// },
-		// {
-		// 	word: 'assume',
-		// 	pos: 'verb',
-		// 	id: '234'
-		// },
-		// {
-		// 	word: 'engineer',
-		// 	pos: 'noun',
-		// 	id: '335'
-		// }
-	];
+	const [words, setWords] = useState([]);
 
 	const swipeRef = useRef(null);
+
+	useEffect(() => {
+		let unsub;
+
+		const fetchWords = async () => {
+			unsub = onSnapshot(collection(db, 'words'), (snapshot) => {
+				setWords(
+					snapshot.docs.map((doc) => ({
+						...doc.data()
+					}))
+				);
+			});
+		};
+		fetchWords();
+		return unsub;
+	}, [db]);
+
 	return (
 		<>
 			<View style={tw('flex-1 -mt-9')}>
 				<Swiper
 					ref={swipeRef}
-					cards={MOCK_DATA}
+					cards={words}
 					containerStyle={{ backgroundColor: 'transparent' }}
 					stackSize={3}
 					cardIndex={0}
@@ -76,12 +79,12 @@ const Cards = () => {
 										'text-gray-800 text-xl text-xl items-center'
 									)}
 								>
-									{card.word}
+									{card.word} ({card.pos})
 								</Text>
 								<Text
 									style={tw('text-gray-600 text-xl text-xl')}
 								>
-									{card.pos}
+									{card.meaning}
 								</Text>
 							</View>
 						) : (

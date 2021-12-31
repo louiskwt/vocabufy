@@ -13,7 +13,7 @@ const Cards = () => {
 
 	useEffect(() => {
 		let unsub;
-
+		// fetch words from the db
 		const fetchWords = async () => {
 			unsub = onSnapshot(collection(db, 'words'), (snapshot) => {
 				setWords(

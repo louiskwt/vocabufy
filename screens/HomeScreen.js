@@ -12,6 +12,7 @@ const HomeScreen = () => {
 	const { logout, user } = useAuth();
 	const navigation = useNavigation();
 
+	// Show modal on first sign in
 	useLayoutEffect(
 		() =>
 			onSnapshot(doc(db, 'users', user.uid), (snapshot) => {

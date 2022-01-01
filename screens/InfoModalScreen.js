@@ -66,6 +66,7 @@ const InfoModalScreen = () => {
 			/>
 
 			<View style={tw('mt-10')}>
+				{/* Update Profile Btn */}
 				<TouchableOpacity
 					disabled={incompleteForm}
 					style={[
@@ -80,7 +81,7 @@ const InfoModalScreen = () => {
 						Update Profile
 					</Text>
 				</TouchableOpacity>
-				{/*  */}
+				{/* logout btn */}
 				<TouchableOpacity
 					style={tw('w-64 p-3 rounded-xl mt-10 bg-red-400')}
 				>

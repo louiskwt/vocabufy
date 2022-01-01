@@ -9,7 +9,7 @@ import { db } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
-	const { logout, user } = useAuth();
+	const { user } = useAuth();
 	const navigation = useNavigation();
 
 	// Show modal on first sign in

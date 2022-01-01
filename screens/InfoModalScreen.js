@@ -7,7 +7,7 @@ import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const InfoModalScreen = () => {
-	const { user } = useAuth();
+	const { user, logout } = useAuth();
 	const navigation = useNavigation();
 	const [name, setName] = useState(null);
 	const [level, setLevel] = useState(null);
@@ -64,20 +64,34 @@ const InfoModalScreen = () => {
 				value={target}
 				onChangeText={(text) => setTarget(text)}
 			/>
-			<TouchableOpacity
-				disabled={incompleteForm}
-				style={[
-					tw('w-64 p-3 rounded-xl absolute bottom-10'),
-					incompleteForm ? tw('bg-gray-400') : tw('bg-red-400')
-				]}
-			>
-				<Text
-					style={tw('text-center text-white text-xl')}
-					onPress={updateUserProfile}
+
+			<View style={tw('mt-10')}>
+				<TouchableOpacity
+					disabled={incompleteForm}
+					style={[
+						tw('w-64 p-3 rounded-xl'),
+						incompleteForm ? tw('bg-gray-400') : tw('bg-red-400')
+					]}
 				>
-					Update Profile
-				</Text>
-			</TouchableOpacity>
+					<Text
+						style={tw('text-center text-white text-xl')}
+						onPress={updateUserProfile}
+					>
+						Update Profile
+					</Text>
+				</TouchableOpacity>
+				{/*  */}
+				<TouchableOpacity
+					style={tw('w-64 p-3 rounded-xl mt-10 bg-red-400')}
+				>
+					<Text
+						style={tw('text-center text-white text-xl')}
+						onPress={logout}
+					>
+						Log Out
+					</Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 };

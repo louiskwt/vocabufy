@@ -29,7 +29,6 @@ const HomeScreen = () => {
 			<Header user={user} />
 			{/* Learning Feed  */}
 			<Cards />
-			<Button title='Log out' onPress={logout} />
 		</SafeAreaView>
 	);
 };

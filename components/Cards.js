@@ -46,7 +46,7 @@ const Cards = () => {
 					}}
 					overlayLabels={{
 						left: {
-							title: 'NOPE',
+							title: '唔識～',
 							style: {
 								label: {
 									textAlign: 'right',
@@ -55,7 +55,7 @@ const Cards = () => {
 							}
 						},
 						right: {
-							title: 'I know it',
+							title: '識！',
 							style: {
 								label: {
 									color: '#4DED30'

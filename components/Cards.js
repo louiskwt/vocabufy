@@ -26,18 +26,16 @@ const Cards = (props) => {
 
 		// fetch words from the db
 		const fetchWords = async () => {
-			// get the swiped unknown (?) words' id from user's collection
-			const unknowns = await getDocs(
-				collection(db, 'users', user.uid, 'unknowns').withConverter(
-					(snapshot) => snapshot.docs.map((doc) => doc.id)
-				)
-			);
-			const unknownsIds = unknowns.length > 0 ? unknowns : ['test'];
-			console.log(unknownsIds);
+			// get the swiped known words' id from user's collection
+			const knowns = await getDocs(
+				collection(db, 'users', user.uid, 'knowns')
+			).then((snapshot) => snapshot.docs.map((doc) => doc.id));
+			const knownsIds = knowns.length > 0 ? knowns : ['test'];
+			console.log(knownsIds);
 			unsub = onSnapshot(
 				query(
 					collection(db, 'words'),
-					where('id', 'not-in', [...unknownsIds])
+					where('id', 'not-in', [...knownsIds])
 				),
 				(snapshot) => {
 					setWords(

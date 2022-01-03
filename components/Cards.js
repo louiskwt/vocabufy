@@ -3,7 +3,9 @@ import {
 	onSnapshot,
 	getDocs,
 	query,
-	where
+	where,
+	setDoc,
+	doc
 } from 'firebase/firestore';
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
@@ -50,6 +52,27 @@ const Cards = (props) => {
 		return unsub;
 	}, [db]);
 
+	const swipeLeft = (cardIndex) => {
+		// No interaction if card does not exist
+		if (!words[cardIndex]) return;
+		// update db
+		const wordSwiped = words[cardIndex];
+		console.log(`You don't know ${wordSwiped.word}`);
+		setDoc(
+			doc(db, 'users', user.uid, 'unknowns', wordSwiped.id),
+			wordSwiped
+		);
+	};
+
+	const swipeRight = (cardIndex) => {
+		// No interaction if card does not exist
+		if (!words[cardIndex]) return;
+		// update db
+		const wordSwiped = words[cardIndex];
+		console.log(`You know ${wordSwiped.word}`);
+		setDoc(doc(db, 'users', user.uid, 'knowns', wordSwiped.id), wordSwiped);
+	};
+
 	return (
 		<>
 			<View style={tw('flex-1 -mt-9')}>
@@ -61,11 +84,11 @@ const Cards = (props) => {
 					cardIndex={0}
 					animateCardOpacity
 					verticalSwipe={false}
-					onSwipedLeft={() => {
-						console.log('Swipe KNOWN');
+					onSwipedLeft={(cardIndex) => {
+						swipeLeft(cardIndex);
 					}}
-					onSwipedRight={() => {
-						console.log('Swipe DO NOT KNOW');
+					onSwipedRight={(cardIndex) => {
+						swipeRight(cardIndex);
 					}}
 					overlayLabels={{
 						left: {

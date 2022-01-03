@@ -28,7 +28,7 @@ const HomeScreen = () => {
 			{/* Header */}
 			<Header user={user} />
 			{/* Learning Feed  */}
-			<Cards />
+			<Cards user={user} />
 		</SafeAreaView>
 	);
 };

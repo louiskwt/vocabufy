@@ -1,4 +1,10 @@
-import { collection, onSnapshot } from 'firebase/firestore';
+import {
+	collection,
+	onSnapshot,
+	getDocs,
+	query,
+	where
+} from 'firebase/firestore';
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
@@ -6,22 +12,39 @@ import tw from 'tailwind-rn';
 import { db } from '../firebase';
 import CardButtons from './CardButtons';
 
-const Cards = () => {
+const Cards = (props) => {
 	const [words, setWords] = useState([]);
 
 	const swipeRef = useRef(null);
 
+	const { user } = props;
+
 	useEffect(() => {
 		let unsub;
+
 		// fetch words from the db
 		const fetchWords = async () => {
-			unsub = onSnapshot(collection(db, 'words'), (snapshot) => {
-				setWords(
-					snapshot.docs.map((doc) => ({
-						...doc.data()
-					}))
-				);
-			});
+			// get the swiped unknown (?) words' id from user's collection
+			const unknowns = await getDocs(
+				collection(db, 'users', user.uid, 'unknowns').withConverter(
+					(snapshot) => snapshot.docs.map((doc) => doc.id)
+				)
+			);
+			const unknownsIds = unknowns.length > 0 ? unknowns : ['test'];
+			console.log(unknownsIds);
+			unsub = onSnapshot(
+				query(
+					collection(db, 'words'),
+					where('id', 'not-in', [...unknownsIds])
+				),
+				(snapshot) => {
+					setWords(
+						snapshot.docs.map((doc) => ({
+							...doc.data()
+						}))
+					);
+				}
+			);
 		};
 		fetchWords();
 		return unsub;

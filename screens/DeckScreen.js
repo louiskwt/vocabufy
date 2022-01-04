@@ -1,17 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { SafeAreaView, Text, Button } from 'react-native';
 
 const DeckScreen = () => {
 	const navigation = useNavigation();
 	return (
-		<View>
-			<Text>Explore deck</Text>
+		<SafeAreaView>
 			<Button
 				title='Back to Home Page'
 				onPress={() => navigation.navigate('Home')}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 };
 

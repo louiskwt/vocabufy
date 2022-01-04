@@ -1,15 +1,11 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { SafeAreaView, Text, Button } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import SecondaryHeader from '../components/SecondaryHeader';
 
 const DeckScreen = () => {
-	const navigation = useNavigation();
 	return (
 		<SafeAreaView>
-			<Button
-				title='Back to Home Page'
-				onPress={() => navigation.navigate('Home')}
-			/>
+			<SecondaryHeader title='Your Deck' />
 		</SafeAreaView>
 	);
 };

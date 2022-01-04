@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { Button, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import useAuth from '../hooks/useAuth';
 import tw from 'tailwind-rn';
 import Header from '../components/Header';

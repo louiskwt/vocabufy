@@ -2,13 +2,15 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import SecondaryHeader from '../components/SecondaryHeader';
 import WordList from '../components/WordList';
+import useAuth from '../hooks/useAuth';
 
 const DeckScreen = () => {
+	const { user } = useAuth();
 	return (
 		<SafeAreaView>
 			<SecondaryHeader title='Your Deck' />
 			{/* Word List */}
-			<WordList />
+			<WordList user={user} />
 		</SafeAreaView>
 	);
 };

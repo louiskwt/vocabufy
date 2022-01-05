@@ -1,12 +1,4 @@
-import {
-	collection,
-	onSnapshot,
-	getDocs,
-	query,
-	where,
-	setDoc,
-	doc
-} from 'firebase/firestore';
+import { collection, onSnapshot, setDoc, doc } from 'firebase/firestore';
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
@@ -44,7 +36,7 @@ const Cards = (props) => {
 		// No interaction if card does not exist
 		if (!words[cardIndex]) return;
 		// update db
-		const wordSwiped = words[cardIndex];
+		const wordSwiped = { tag: 'unknown', ...words[cardIndex] };
 		console.log(`You don't know ${wordSwiped.word}`);
 		setDoc(
 			doc(db, 'users', user.uid, 'unknowns', wordSwiped.id),
@@ -56,7 +48,7 @@ const Cards = (props) => {
 		// No interaction if card does not exist
 		if (!words[cardIndex]) return;
 		// update db
-		const wordSwiped = words[cardIndex];
+		const wordSwiped = { tag: 'known', ...words[cardIndex] };
 		console.log(`You know ${wordSwiped.word}`);
 		setDoc(doc(db, 'users', user.uid, 'knowns', wordSwiped.id), wordSwiped);
 	};

@@ -17,27 +17,8 @@ const WordList = ({ user }) => {
 		let unsub;
 
 		const fetchStoredWords = async () => {
-			const knowns = await getDocs(
-				collection(db, 'users', user.uid, 'knowns')
-			).then((snapshot) => snapshot.docs.map((doc) => doc.id));
-
-			const unknowns = await getDocs(
-				collection(db, 'users', user.uid, 'unknowns')
-			).then((snapshot) => snapshot.docs.map((doc) => doc.id));
-
-			const knownWordIds = knowns.length > 0 ? knowns : ['test'];
-			const unknownWordIds = unknowns.length > 0 ? unknowns : ['test'];
-
-			console.log(knownWordIds);
-			console.log(unknownWordIds);
-			const list = [...knownWordIds, ...unknownWordIds];
-			console.log(list);
-
 			unsub = onSnapshot(
-				query(
-					collection(db, 'words'),
-					where('id', 'array-contains', list)
-				),
+				collection(db, 'users', user.uid, 'swiped'),
 				(snapshot) => {
 					setWordList(
 						snapshot.docs.map((doc) => ({ ...doc.data() }))
@@ -45,8 +26,9 @@ const WordList = ({ user }) => {
 				}
 			);
 		};
-		fetchStoredWords();
 
+		fetchStoredWords();
+		console.log(wordList);
 		return unsub;
 	}, [db]);
 

@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import tw from 'tailwind-rn';
 import WordRow from './WordRow';
-import {
-	collection,
-	onSnapshot,
-	getDocs,
-	query,
-	where
-} from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const WordList = ({ user }) => {
@@ -23,12 +17,13 @@ const WordList = ({ user }) => {
 					setWordList(
 						snapshot.docs.map((doc) => ({ ...doc.data() }))
 					);
+					console.log(wordList);
 				}
 			);
 		};
 
 		fetchStoredWords();
-		console.log(wordList);
+
 		return unsub;
 	}, [db]);
 

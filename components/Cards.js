@@ -99,16 +99,26 @@ const Cards = (props) => {
 							>
 								<Text
 									style={tw(
-										'text-gray-800 text-xl text-xl items-center'
+										'text-gray-800 text-3xl items-center'
 									)}
 								>
 									{card.word} ({card.pos})
 								</Text>
-								<Text
-									style={tw('text-gray-600 text-xl text-xl')}
-								>
+								<Text style={tw('text-gray-600 text-2xl mt-3')}>
 									{card.meaning}
 								</Text>
+								<View style={tw(' mt-5')}>
+									<Text
+										style={tw('text-gray-600 text-xl mt-3')}
+									>
+										[同]: {card.synonym}
+									</Text>
+									<Text
+										style={tw('text-gray-600 text-xl mt-2')}
+									>
+										[反]: {card.antonym}
+									</Text>
+								</View>
 							</View>
 						) : (
 							<View

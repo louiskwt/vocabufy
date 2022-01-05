@@ -38,10 +38,7 @@ const Cards = (props) => {
 		// update db
 		const wordSwiped = { tag: 'unknown', ...words[cardIndex] };
 		console.log(`You don't know ${wordSwiped.word}`);
-		setDoc(
-			doc(db, 'users', user.uid, 'unknowns', wordSwiped.id),
-			wordSwiped
-		);
+		setDoc(doc(db, 'users', user.uid, 'swiped', wordSwiped.id), wordSwiped);
 	};
 
 	const swipeRight = (cardIndex) => {
@@ -50,7 +47,7 @@ const Cards = (props) => {
 		// update db
 		const wordSwiped = { tag: 'known', ...words[cardIndex] };
 		console.log(`You know ${wordSwiped.word}`);
-		setDoc(doc(db, 'users', user.uid, 'knowns', wordSwiped.id), wordSwiped);
+		setDoc(doc(db, 'users', user.uid, 'swiped', wordSwiped.id), wordSwiped);
 	};
 
 	return (

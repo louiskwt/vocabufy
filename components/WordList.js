@@ -32,7 +32,9 @@ const WordList = ({ user }) => {
 			style={tw('h-full')}
 			data={wordList}
 			keyExtractor={(item) => item.id}
-			renderItem={({ item }) => <WordRow wordDetails={item} />}
+			renderItem={({ item, index }) => (
+				<WordRow wordDetails={item} index={index} />
+			)}
 		/>
 	) : (
 		<View style={tw('p-5')}>

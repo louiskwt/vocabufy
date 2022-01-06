@@ -1,8 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import tw from 'tailwind-rn';
+import { Entypo } from '@expo/vector-icons';
 
-const WordRow = ({ wordDetails, index }) => {
+const WordRow = ({ wordDetails }) => {
 	return (
 		<TouchableOpacity
 			style={[
@@ -12,10 +13,19 @@ const WordRow = ({ wordDetails, index }) => {
 				styles.cardShadow
 			]}
 		>
-			<Text style={tw('rounded-full h-16 w-16 mr-4 items-center')}>
-				{index + 1}
-			</Text>
-			<Text>{wordDetails.word}</Text>
+			<View style={[tw('rounded-full h-8 w-16 mr-4 items-center')]}>
+				{wordDetails.tag === 'known' ? (
+					<Entypo name='check' size={24} color='green' />
+				) : (
+					<Entypo name='cross' size={24} color='red' />
+				)}
+			</View>
+			<View>
+				<Text style={tw('text-lg font-semibold')}>
+					{wordDetails.word} ({wordDetails.pos})
+				</Text>
+				<Text style={tw('text-lg mt-3')}>{wordDetails.meaning}</Text>
+			</View>
 		</TouchableOpacity>
 	);
 };

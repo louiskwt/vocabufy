@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import tw from 'tailwind-rn';
 import { db } from '../firebase';
+import { shuffleCard } from '../utils/shuffle';
 import CardButtons from './CardButtons';
 
 const Cards = (props) => {
@@ -22,9 +23,11 @@ const Cards = (props) => {
 
 			unsub = onSnapshot(collection(db, 'words'), (snapshot) => {
 				setWords(
-					snapshot.docs.map((doc) => ({
-						...doc.data()
-					}))
+					shuffleCard(
+						snapshot.docs.map((doc) => ({
+							...doc.data()
+						}))
+					)
 				);
 			});
 		};

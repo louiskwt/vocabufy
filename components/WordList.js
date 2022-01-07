@@ -15,9 +15,18 @@ const WordList = ({ user }) => {
 				collection(db, 'users', user.uid, 'swiped'),
 				(snapshot) => {
 					setWordList(
-						snapshot.docs.map((doc) => ({ ...doc.data() }))
+						snapshot.docs
+							.map((doc) => ({ ...doc.data() }))
+							.sort((a, b) => {
+								if (a.word < b.word) {
+									return -1;
+								}
+								if (a.word > b.word) {
+									return 1;
+								}
+								return 0;
+							})
 					);
-					console.log(wordList);
 				}
 			);
 		};

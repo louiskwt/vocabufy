@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import tw from 'tailwind-rn';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 
-const SecondaryHeader = ({ title, addEnabled }) => {
+const SecondaryHeader = ({ title, deck }) => {
 	const navigation = useNavigation();
 	return (
 		<View style={tw('p-2 flex-row items-center justify-between')}>
@@ -22,9 +22,9 @@ const SecondaryHeader = ({ title, addEnabled }) => {
 				</TouchableOpacity>
 				<Text style={tw('text-2xl font-bold pt-2')}>{title}</Text>
 			</View>
-			{addEnabled && (
+			{deck && (
 				<TouchableOpacity style={tw('rounded-full mr-4 p-3 ')}>
-					<FontAwesome5 name='plus-circle' size={30} color='black' />
+					<FontAwesome name='edit' size={24} color='black' />
 				</TouchableOpacity>
 			)}
 		</View>

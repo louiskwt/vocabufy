@@ -8,7 +8,7 @@ const DeckScreen = () => {
 	const { user } = useAuth();
 	return (
 		<SafeAreaView>
-			<SecondaryHeader title='詞彙集' />
+			<SecondaryHeader title='詞彙集' deck={true} />
 			{/* Word List */}
 			<WordList user={user} />
 		</SafeAreaView>

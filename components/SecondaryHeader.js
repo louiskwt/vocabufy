@@ -23,7 +23,10 @@ const SecondaryHeader = ({ title, deck }) => {
 				<Text style={tw('text-2xl font-bold pt-2')}>{title}</Text>
 			</View>
 			{deck && (
-				<TouchableOpacity style={tw('rounded-full mr-4 p-3 ')}>
+				<TouchableOpacity
+					style={tw('rounded-full mr-4 p-3 ')}
+					onPress={() => navigation.navigate('Quiz')}
+				>
 					<FontAwesome name='edit' size={24} color='black' />
 				</TouchableOpacity>
 			)}
